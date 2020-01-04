@@ -65,7 +65,6 @@
             state: present
             tags:
               Name: Webserver
-            purge_tags: true
 
         - name: Tag the Security group
           ec2_tag:
@@ -75,5 +74,4 @@
             resource: "{{ security_group.group_id }}"
             state: present
             tags:
-              Name: Webserver
-            purge_tags: true            
+              Name: Webserver          
