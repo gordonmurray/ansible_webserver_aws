@@ -1,5 +1,5 @@
 ---
-- hosts: tag_Name_Webserver
+- hosts: all
   user: ubuntu
   become: yes
   name: Install webserver items
