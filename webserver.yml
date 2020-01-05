@@ -1,3 +1,4 @@
+# Configure AWS infrastructure
 ---
 - hosts: all
   user: ubuntu
@@ -6,5 +7,4 @@
 
   tasks:
     - include: roles/webserver/tasks/apache.yml
-  #- include: roles/webserver/tasks/helloworld.yml
-
+    - include: roles/webserver/tasks/helloworld.yml

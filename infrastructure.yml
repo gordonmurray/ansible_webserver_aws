@@ -1,4 +1,4 @@
-# AWS EC2 playbook
+# Create AWS infrastructure
 ---
 - hosts: "localhost"
   connection: "local"
@@ -47,7 +47,7 @@
             aws_access_key: "{{ec2_access_key}}"
             aws_secret_key: "{{ec2_secret_key}}"
             key_name: "ansible-webserver"
-            id: "ansible-webserver"
+            id: "ansible-webserver-5"
             group_id: "{{ security_group.group_id }}"
             image: "{{ image }}"
             instance_type: t2.micro
