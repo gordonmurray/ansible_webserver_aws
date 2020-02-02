@@ -1,0 +1,9 @@
+- name: Install PHP and some related packages
+  vars:
+    packages:
+      - php
+      - php-mysql
+  apt:
+    pkg: "{{ packages }}"
+    update_cache: yes
+    state: latest

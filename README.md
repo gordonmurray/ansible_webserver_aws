@@ -1,5 +1,6 @@
 # Ansible webserver AWS
-Using Ansible to create and configure a simple webserver on AWS. Suitable for Ansible version 2.7 or greater.
+
+Using Ansible to create and configure a simple webserver on AWS
 
 ## Install Ansible
 
@@ -15,11 +16,24 @@ Using Ansible to create and configure a simple webserver on AWS. Suitable for An
 
 > ansible-vault create group_vars/all/pass.yml
 
-and include your AWS Key and Secret with permission to create EC2 resources
+Include your AWS Key and Secret with permission to create EC2 resources
 
-> ec2_access_key: [your aws access key ]
+```
+    ec2_access_key: [ your aws access key ]
+    ec2_secret_key: [ your aws secret key ]
+```
 
-> ec2_secret_key: [your aws secret key]
+Create a second file with the following content to allow Ansible to connect to the EC2 instance(s) identified by thier tags
+
+```
+plugin: aws_ec2
+regions:
+  - eu-west-1
+filters:
+  tag:Name: Webserver
+aws_access_key_id: [ your aws access key ]
+aws_secret_access_key: [ your aws secret key ]
+```
 
 ## Dynamic Hosts
 
@@ -27,8 +41,12 @@ aws_ec2.yml is used to determine the host(s) to update based on the Region and a
 
 ## To create the AWS infrastructure items
 
-> ansible-playbook infrastructure.yml --ask-vault-pass
+> ansible-playbook playbook.yml --ask-vault-pass
 
 ## To configure the webserver once it has been created
 
 > ansible-playbook -i aws_ec2.yml webserver.yml --ask-vault-pass
+
+or
+
+> ansible-playbook -i aws_ec2.yml webserver.yml --vault-password-file=vault_password

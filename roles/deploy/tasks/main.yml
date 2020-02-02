@@ -1,0 +1,16 @@
+- name: Copy our src directly to /var/www/html
+  copy:
+    src: ./src/
+    dest: /var/www/html/
+
+- name: Copy our databse connection details template
+  template:
+    src: database.php.j2
+    dest: /var/www/html/database.php
+ 
+- name: Check that the files are deployed
+  uri:
+    url: http://localhost
+    return_content: yes
+  register: this
+  failed_when: "'Bob' not in this.content"

@@ -1,10 +1,24 @@
-# Configure AWS infrastructure
 ---
 - hosts: all
-  user: ubuntu
-  become: yes
-  name: Install webserver items
 
-  tasks:
-    - include: roles/webserver/tasks/apache.yml
-    - include: roles/webserver/tasks/helloworld.yml
+  gather_facts: no
+
+  become: yes
+
+  user: ubuntu
+
+  vars:
+    root_db_password: SecretRootPassword
+    application_db_password: SecretAppPassword
+
+  roles:
+    - apache
+    - php
+    - mysql
+    - deploy
+
+  handlers:
+    - name: Restart MySQL
+      service:
+        name: mysql
+        state: restarted
