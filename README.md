@@ -23,7 +23,11 @@ Include your AWS Key and Secret with permission to create EC2 resources
     ec2_secret_key: [ your aws secret key ]
 ```
 
-Create a second file with the following content to allow Ansible to connect to the EC2 instance(s) identified by thier tags
+Create a second file with the following content to allow Ansible to connect to the EC2 instance(s) identified by their tags
+
+> ansible-vault create aws_ec2.yml
+
+With the following content:
 
 ```
 plugin: aws_ec2
