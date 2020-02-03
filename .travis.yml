@@ -11,7 +11,7 @@ branches:
 
 before_install:
   - sudo apt-get update -qq
-  - pip install awscli
+  - pip install awscli boto boto3
 
 install:
   - pip install ansible
