@@ -1,0 +1,24 @@
+---
+sudo: required
+dist: xenial
+
+language: python
+python: "2.7"
+
+branches:
+  only:
+    - master
+
+before_install:
+  - sudo apt-get update -qq
+  - pip install awscli
+
+install:
+  - pip install ansible
+
+before_script:
+  - ansible --version
+  - echo "${VAULT_PASSWORD}" > vault_password
+
+script:
+  - ansible-playbook -i aws_ec2.yml webserver.yml --vault-password-file=vault_password
