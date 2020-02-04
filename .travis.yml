@@ -19,6 +19,10 @@ install:
 before_script:
   - ansible --version
   - echo "${VAULT_PASSWORD}" > vault_password
+  - cat vault_password
 
 script:
   - ansible-playbook -i aws_ec2.yml webserver.yml --vault-password-file=vault_password
+
+after_script:
+  - exit 1
